@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT * FROM products, brands WHERE products.id_brand = brands.id_brand";
+$sql = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
@@ -16,14 +16,14 @@ $stmt->execute();
             <table id="results" class="table table-striped table-bordered table-info text-center">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Code</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Mã</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Giá gốc</th>
                         <th scope="col">Giá khuyến mãi</th>
                         <th scope="col">Mô tả</th>
                         <th scope="col">Số lượng</th>
-                        <th scope="col">Thương hiệu</th>
-                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Loại</th>
                         <th scope="col">Quản lý</th>
 
                     </tr>
@@ -31,24 +31,21 @@ $stmt->execute();
                 <tbody>
                     <?php while ($result = $stmt->fetch()) : ?>
                         <tr>
-                            <td><?= htmlspecialchars($result['name']) ?></td>
-                            <td><?= htmlspecialchars($result['code']) ?></td>
-                            <td><?= htmlspecialchars(number_format($result['price'], 0, ',', '.') . ' VND') ?></td>
-                            <td><?= htmlspecialchars(number_format($result['price_sale'], 0, ',', '.') . ' VND') ?></td>
-                            <td><?= htmlspecialchars($result['description']) ?></td>
-                            <td><?= htmlspecialchars($result['amount']) ?></td>
-                            <td><?= htmlspecialchars($result['brand']) ?></td>
-                            <td><img class="img-thumbnail" src="../src/images/<?= htmlspecialchars($result['image']) ?>" alt=""></td>
+                            <td><?= htmlspecialchars($result['tensanpham']) ?></td>
+                            <td><?= htmlspecialchars($result['masanpham']) ?></td>
+                            <td><img class="img-thumbnail" src="../src/images/<?= htmlspecialchars($result['hinhanh']) ?>" alt=""></td>
+                            <td><?= htmlspecialchars(number_format($result['gia'], 0, ',', '.') . ' VND') ?></td>
+                            <td><?= htmlspecialchars(number_format($result['gia_sale'], 0, ',', '.') . ' VND') ?></td>
+                            <td><?= htmlspecialchars($result['tomtat']) ?></td>
+                            <td><?= htmlspecialchars($result['soluong']) ?></td>
+                            <td><?= htmlspecialchars($result['tendanhmuc']) ?></td>
 
                             <td>
                                 
-                                <a href="admin.php?controller=product&action=update&idproduct=<?= htmlspecialchars($result['id'])?>" class="btn btn-xs btn-warning text-white mb-1 ms-1">
+                                <a href="admin.php?controller=product&action=update&idproduct=<?= htmlspecialchars($result['id_sanpham'])?>" class="btn btn-xs btn-warning text-white mb-1 ms-1">
                                     <i alt="Update" class="fa-solid fa-pen-nib" style="color: #ffffff;"></i></a> 
-                                
-                                    
-                                    <form action="/model/products/handle.php?idproduct=<?= htmlspecialchars($result['id'])?>" method="POST">
+                                    <form action="/model/products/handle.php?idproduct=<?= htmlspecialchars($result['id_sanpham'])?>" method="POST">
                                         <button class="btn btn-xs btn-danger ms-1" type="submit"  name="deleteproduct">
-                                            
                                             <i alt="Delete" class="fa fa-trash"></i></button> 
                                         </form>
                                         

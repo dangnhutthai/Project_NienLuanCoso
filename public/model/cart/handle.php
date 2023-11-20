@@ -101,45 +101,45 @@ if (isset($_POST['updatecart'])) {
 }
 
 if (isset($_POST['favorite'])) {
-    $id = $_GET['idproduct'];
+    $idproduct = $_GET['idproduct'];
     $iduser = $_SESSION['iduser'];
-    $sql_addfav = "SELECT * FROM accounts WHERE id_acc='$iduser' LIMIT 1";
+    $sql_addfav = "SELECT * FROM tbl_user WHERE id_user = '$iduser' LIMIT 1";
     $stmt_addfav = $pdo->prepare($sql_addfav);
     $stmt_addfav->execute();
     $row_addfav = $stmt_addfav->fetch();
-    $iduser = $_SESSION['iduser'];
-    $sql_pro = "SELECT * FROM products WHERE id='$id' LIMIT 1";
+    $sql_pro = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$idproduct' LIMIT 1";
     $stmt_pro = $pdo->prepare($sql_pro);
     $stmt_pro->execute();
     $row_pro = $stmt_pro->fetch();
-    $code = $row_pro['code'];
+    $code = $row_pro['masanpham'];
     if ($row_addfav['pro_fav'] == '') {
-        $sql_fav = "UPDATE accounts SET pro_fav = ? WHERE id_acc = $iduser LIMIT 1";
+        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = $iduser LIMIT 1";
         $stmt_fav = $pdo->prepare($sql_fav);
         $stmt_fav->execute([
             $code
         ]);
-        echo '<script>alert("Đã thêm ' . $row_pro['name'] . ' vào yêu thích!")</script>';
+        echo '<script>alert("Đã thêm ' . $row_pro['tensanpham'] . ' vào yêu thích!")</script>';
         echo '<script>window.open("/","_self")</script>';
-    } elseif (similar_text("$row_pro[code]", "$row_addfav[pro_fav]") == 5) {
+    } elseif (substr_count($row_addfav['pro_fav'], $row_pro['masanpham']) == 0) {
         $str = $row_addfav['pro_fav'];
-        $str_fav = str_replace($row_pro['code'], '', $str);
-        $sql_fav = "UPDATE accounts SET pro_fav = ? WHERE id_acc = $iduser LIMIT 1";
+        $str_fav = $str.$row_pro['masanpham'];
+        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = $iduser LIMIT 1";
         $stmt_fav = $pdo->prepare($sql_fav);
         $stmt_fav->execute([
             $str_fav
         ]);
-        echo '<script>alert("Đã xóa ' . $row_pro['name'] . ' khỏi yêu thích!")</script>';
+        echo '<script>alert("Đã thêm ' . $row_pro['tensanpham'] . ' vào yêu thích!")</script>';
         echo '<script>window.open("/","_self")</script>';
+        
     } else {
         $str = $row_addfav['pro_fav'];
-        $str_fav = $str . $row_pro['code'];
-        $sql_fav = "UPDATE accounts SET pro_fav = ? WHERE id_acc = $iduser LIMIT 1";
+        $str_fav = str_replace($row_pro['masanpham'], '', $str);
+        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = $iduser LIMIT 1";
         $stmt_fav = $pdo->prepare($sql_fav);
         $stmt_fav->execute([
             $str_fav
         ]);
-        echo '<script>alert("Đã thêm ' . $row_pro['name'] . ' vào yêu thích!")</script>';
+        echo '<script>alert("Đã xóa ' . $row_pro['tensanpham'] . ' khỏi yêu thích!")</script>';
         echo '<script>window.open("/","_self")</script>';
     }
 }

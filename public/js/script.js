@@ -3,7 +3,7 @@ $(document).ready(function () {
         rules: {
             address: {
                 required: true,
-                minlength: 5
+                minlength: 15
             },
             phone: {
                 required: true,

@@ -1,4 +1,21 @@
+.heading_slide {
+    background: url('../src/images/bg_slide.jpg');
+}
+.carousel {
+    width: 500px;
+    height: 500px;
+}
+
+.title, .heading_admin {
+    background-color: #176B87;
+}
+/* 
+.header {
+    background-image: url('../src/images/banner_log_sign.png');
+} */
+
 footer .gotop{
+    background-color: #176B87;
 	bottom: 20px;
 	right: 20px;
 	position: fixed;
@@ -12,25 +29,49 @@ footer .gotop:hover {
 }
 
 footer, .background {
-    background-color: #8FEBDE !important;
+    background-color: #176B87 !important;
 }
 
 header .navbar {
-    background-color: #8FEBDE;
+    background-color: #176B87;
 }
 
 .access-btn {
     color: white;
-    background-color: #45706B !important;
-    border-radius: 5px;
+    border: none;
+    background-color: #176B87;
+}
+
+
+.access-btn a {
+    text-decoration: none;
+    color: white;
+    
 }
 
 .access-btn:hover {
     color: black;
-    background-color: #8FEBDE !important;
+    background-color: #C0C0C0 !important;
 }
 
-.access-btn a {
+.access-btn a:hover {
+    color: black;
+}
+
+
+.cart-btn {
+    color: white;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.cart-btn:hover {
+    color: white;
+    background-color: #C0C0C0 !important;
+}
+
+.cart-btn a {
     text-decoration: none;
     color: white !important;
 
@@ -38,13 +79,17 @@ header .navbar {
 
 footer .hotlinebtn {
     border: none ;
-    background-color: #8FEBDE;
+    background-color: #176B87;
 }
 
 footer .hotlinebtn:hover {
     width: 40px;
     color: black;
-    background-color: white;
+    background-color: black;
+}
+
+.nav-link:hover {
+    color: #7c7c7c !important;
 }
 
 .exit-btn {
@@ -52,10 +97,26 @@ footer .hotlinebtn:hover {
     color: white;
     background-color: rgb(231, 64, 64);
     text-decoration: none !important;
+    border-color: white;
 }
 
 .price_native {
     background-color: rgb(217, 212, 212);
+}
+
+.btn-addcart {
+    background-color: #176B87;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-fav:hover {
+    background-color: #C0C0C0 !important;
+
+}
+.btn-addcart:hover {
+    background-color: rgb(114, 186, 210);
+    color: black;
 }
 
 .btn-buy {
@@ -69,23 +130,10 @@ footer .hotlinebtn:hover {
     color: black;
 }
 
-.form-detail {
-    color: #fff;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    background: url('../src/images/Login.jfif');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: local;
-}
-
 .login-btn {
     border: none    ;
     border-radius: 5px;
-    background-color: #1fad9a; 
+    background-color: #176B87; 
     color: #fff;
 }
 
@@ -95,10 +143,9 @@ footer .hotlinebtn:hover {
 }
 
 .imgfav {
-    width: 240px;
-    height: 190px;
+    width: 200px;
+    height: 150px;
     border-radius: 5px;
 }
-/* #f0f0f5 */
 
-/* #8FEBDE */
+/* #176B87 */

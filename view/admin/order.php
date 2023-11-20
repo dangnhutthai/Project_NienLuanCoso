@@ -3,7 +3,6 @@ require '../../bootstrap.php';
 $sql = "SELECT DISTINCT code_order, name, phone, address, payment, status FROM orders ";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-
 ?>
 
 <div class="container-fluid">

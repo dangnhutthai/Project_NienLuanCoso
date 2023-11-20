@@ -10,12 +10,13 @@ if (isset($_POST['addproduct'])) {
     $price = htmlspecialchars($_POST['price']);
     $price_sale = htmlspecialchars($_POST['price_sale']);
     $description = htmlspecialchars($_POST['description']);
+    $content = htmlspecialchars($_POST['content']);
     $amount = htmlspecialchars($_POST['amount']);
-    $id_brand = htmlspecialchars($_POST['id_brand']);
+    $idcate = htmlspecialchars($_POST['idcategory']);
     $image = htmlspecialchars($_FILES['image']['name']);
     $image_tmp = $_FILES['image']['tmp_name'];
-    $sql_addproduct = "INSERT INTO products (name, code, price, price_sale,description, amount, id_brand, image) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql_addproduct = "INSERT INTO tbl_sanpham (tensanpham, masanpham, gia, gia_sale, tomtat, noidung, soluong, id_danhmuc, hinhanh) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql_addproduct);
     $stmt->execute([
         $name,
@@ -23,8 +24,9 @@ if (isset($_POST['addproduct'])) {
         $price,
         $price_sale,
         $description,
+        $content,
         $amount,
-        $id_brand,
+        $idcate,
         $image
     ]);
     move_uploaded_file($image_tmp, '../../src/images/' . $image);
@@ -35,36 +37,37 @@ if (isset($_POST['addproduct'])) {
     $price = htmlspecialchars($_POST['price']);
     $price_sale = htmlspecialchars($_POST['price_sale']);
     $description = htmlspecialchars($_POST['description']);
+    $content = htmlspecialchars($_POST['content']);
     $amount = htmlspecialchars($_POST['amount']);
-    $id_brand = htmlspecialchars($_POST['id_brand']);
+    $idcate = htmlspecialchars($_POST['idcategory']);
     $image = htmlspecialchars($_FILES['image']['name']);
     $image_tmp = $_FILES['image']['tmp_name'];
     if ($image != '') {
         move_uploaded_file($image_tmp, '../../src/images/' . $image);
-        $sql_updateimage = "SELECT * FROM products WHERE id='$_GET[idproduct]'";
+        $sql_updateimage = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$_GET[idproduct]'";
         $stmt_image = $pdo->prepare($sql_updateimage);
         $stmt_image->execute();
         while ($row = $stmt_image->fetch()) {
             unlink('../../src/images/' . $row['image']);
         }
-        $sql_update = "UPDATE products SET name='" . $name . "',  code='" . $code . "', price='" . $price . "', 
-        price_sale='" . $price_sale . "', amount='" . $amount . "', description='" . $description . "', image='" . $image . "', id_brand='" . $id_brand . "' ";
+        $sql_update = "UPDATE tbl_sanpham SET tensanpham='" . $name . "',  masanpham='" . $code . "', gia='" . $price . "', 
+        gia_sale='" . $price_sale . "', soluong ='" . $amount . "', tomtat='" . $description . "', hinhanh='" . $image . "', id_danhmuc='" . $id_brand . "' ";
     } else {
-        $sql_update = "UPDATE products SET name='" . $name . "',  code='" . $code . "', price='" . $price . "', 
-        price_sale='" . $price_sale . "', amount='" . $amount . "', description='" . $description . "', id_brand='" . $id_brand . "' WHERE id = '$_GET[idproduct]'";
+        $sql_update = "UPDATE tbl_sanpham SET tensanphame='" . $name . "',  masanpham='" . $code . "', gia='" . $price . "', 
+        gia_sale='" . $price_sale . "', soluong ='" . $amount . "', tomtat='" . $description . "', id_danhmuc ='" . $id_brand . "' WHERE id_sanpham = '$_GET[idproduct]'";
     }
     $stmt_update = $pdo->prepare($sql_update);
     $stmt_update->execute();
     header('Location: ../../admin/admin.php?controller=product&action=index');
 
 } else {
-    $sql_deleteimage = "SELECT * FROM products WHERE id='$_GET[idproduct]'";
+    $sql_deleteimage = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$_GET[idproduct]'";
     $stmt_image = $pdo->prepare($sql_deleteimage);
     $stmt_image->execute();
     while ($row = $stmt_image->fetch()) {
         unlink('../../src/images/' . $row['image']);
     }
-    $sql_delete = "DELETE FROM products WHERE id='$_GET[idproduct]'";
+    $sql_delete = "DELETE FROM tbl_sanpham WHERE id_sanpham = '$_GET[idproduct]'";
     $stmt = $pdo->prepare($sql_delete);
     $stmt->execute();
     header('Location: ../../admin/admin.php?controller=product&action=index');
