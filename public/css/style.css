@@ -1,0 +1,104 @@
+footer .gotop{
+	bottom: 20px;
+	right: 20px;
+	position: fixed;
+	text-align: center;
+	z-index: 100;
+    border-color: black;
+}
+
+footer .gotop:hover {
+    background-color: rgb(162, 150, 150) !important;
+}
+
+footer, .background {
+    background-color: #8FEBDE !important;
+}
+
+header .navbar {
+    background-color: #8FEBDE;
+}
+
+.access-btn {
+    color: white;
+    background-color: #45706B !important;
+    border-radius: 5px;
+}
+
+.access-btn:hover {
+    color: black;
+    background-color: #8FEBDE !important;
+}
+
+.access-btn a {
+    text-decoration: none;
+    color: white !important;
+
+}
+
+footer .hotlinebtn {
+    border: none ;
+    background-color: #8FEBDE;
+}
+
+footer .hotlinebtn:hover {
+    width: 40px;
+    color: black;
+    background-color: white;
+}
+
+.exit-btn {
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(231, 64, 64);
+    text-decoration: none !important;
+}
+
+.price_native {
+    background-color: rgb(217, 212, 212);
+}
+
+.btn-buy {
+    background-color: rgba(255, 0, 0, 0.78);
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-buy:hover {
+    background-color: orange;
+    color: black;
+}
+
+.form-detail {
+    color: #fff;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    background: url('../src/images/Login.jfif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local;
+}
+
+.login-btn {
+    border: none    ;
+    border-radius: 5px;
+    background-color: #1fad9a; 
+    color: #fff;
+}
+
+.login-btn:hover {
+    color: white;
+    background-color: #0b413a;
+}
+
+.imgfav {
+    width: 240px;
+    height: 190px;
+    border-radius: 5px;
+}
+/* #f0f0f5 */
+
+/* #8FEBDE */
