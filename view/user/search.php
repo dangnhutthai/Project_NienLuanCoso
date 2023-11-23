@@ -1,5 +1,5 @@
 <?php
-include_once '../view/partials/heading.php';
+include_once '../view/user/partials/heading.php';
 
 $hotkey = $_POST['hotkey'];
 $sql_select = "SELECT * FROM tbl_sanpham WHERE tensanpham like '%$hotkey%'";

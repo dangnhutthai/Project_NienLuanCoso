@@ -30,7 +30,7 @@ if (isset($_POST['addproduct'])) {
         $image
     ]);
     move_uploaded_file($image_tmp, '../../src/images/' . $image);
-    header('Location: ../../admin/admin.php?controller=product&action=index');
+    header('Location: ../../admin.php?controller=product&action=index');
 } elseif (isset($_POST['updateproduct'])) {
     $name = htmlspecialchars($_POST['name']);
     $code = htmlspecialchars($_POST['code']);
@@ -50,15 +50,15 @@ if (isset($_POST['addproduct'])) {
         while ($row = $stmt_image->fetch()) {
             unlink('../../src/images/' . $row['image']);
         }
-        $sql_update = "UPDATE tbl_sanpham SET tensanpham='" . $name . "',  masanpham='" . $code . "', gia='" . $price . "', 
-        gia_sale='" . $price_sale . "', soluong ='" . $amount . "', tomtat='" . $description . "', hinhanh='" . $image . "', id_danhmuc='" . $id_brand . "' ";
+        $sql_update = "UPDATE tbl_sanpham SET tensanpham='" . $name . "',  masanpham='" . $code . "', gia='" . $price . "', noidung = '".$content."',
+        gia_sale='" . $price_sale . "', soluong ='" . $amount . "', tomtat='" . $description . "', hinhanh='" . $image . "', id_danhmuc='" . $idcate . "' ";
     } else {
-        $sql_update = "UPDATE tbl_sanpham SET tensanphame='" . $name . "',  masanpham='" . $code . "', gia='" . $price . "', 
-        gia_sale='" . $price_sale . "', soluong ='" . $amount . "', tomtat='" . $description . "', id_danhmuc ='" . $id_brand . "' WHERE id_sanpham = '$_GET[idproduct]'";
+        $sql_update = "UPDATE tbl_sanpham SET tensanpham='" . $name . "',  masanpham='" . $code . "', gia='" . $price . "', noidung = '".$content."',
+        gia_sale='" . $price_sale . "', soluong ='" . $amount . "', tomtat='" . $description . "', id_danhmuc ='" . $idcate . "' WHERE id_sanpham = '$_GET[idproduct]'";
     }
     $stmt_update = $pdo->prepare($sql_update);
     $stmt_update->execute();
-    header('Location: ../../admin/admin.php?controller=product&action=index');
+    header('Location: ../../admin.php?controller=product&action=index');
 
 } else {
     $sql_deleteimage = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$_GET[idproduct]'";
@@ -70,5 +70,5 @@ if (isset($_POST['addproduct'])) {
     $sql_delete = "DELETE FROM tbl_sanpham WHERE id_sanpham = '$_GET[idproduct]'";
     $stmt = $pdo->prepare($sql_delete);
     $stmt->execute();
-    header('Location: ../../admin/admin.php?controller=product&action=index');
+    header('Location: ../../admin.php?controller=product&action=index');
 }

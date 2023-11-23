@@ -10,7 +10,7 @@ $i = 0;
     <div class="row justify-content-center">
         <div class="col-8">
             <h1 class="text-center mt-2">Category</h1>
-            <a href="admin.php?controller=brand&action=add" class="btn btn-primary my-3">
+            <a href="admin.php?controller=category&action=add" class="btn btn-primary my-3">
                 <i class="fa fa-plus"></i> New Category
             </a>
             <table id="results" class="table table-striped table-bordered table-info text-center">
@@ -31,7 +31,7 @@ $i = 0;
                                     <a class="btn btn-xs btn-warning text-white" href="admin.php?controller=category&action=update&idcategory=<?= htmlspecialchars($result['id_danhmuc']) ?>">
                                         <i alt="Update" class="fa-solid fa-pen-nib" style="color: #ffffff;"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-xs btn-danger ms-2" name="deletecategory">
+                                    <button onclick="return confirm('Xóa loại cá?');" type="submit" class="btn btn-xs btn-danger ms-2" name="deletecategory">
                                         <i alt="Delete" class="fa fa-trash"></i>
                                     </button>
                                 </td>

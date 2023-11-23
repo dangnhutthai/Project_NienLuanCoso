@@ -1,6 +1,6 @@
 <?php
 
-$sql_select = "SELECT * FROM accounts";
+$sql_select = "SELECT * FROM tbl_user";
 $stmt_select = $pdo->prepare($sql_select);
 $stmt_select->execute();
 
@@ -11,15 +11,14 @@ $stmt_select->execute();
 <h1 class="text-center mt-2">Account</h1>
 <div class="row justify-content-center">
     <div class="col-10">
-    <table class="table table-striped-columns">
+    <table class="table table-striped-columns mt-3">
         <thead>
             <tr class="text-center">
                 <th>STT</th>
                 <th>Username</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Admin</th>
-                <th></th>
+                <th>Địa chỉ</th>
             </tr>
         </thead>
         <tbody class="table-group-divider text-center">
@@ -30,21 +29,15 @@ $stmt_select->execute();
             ?>
 
                 <tr>
-                    <form action="../model/accounts/handle.php?id_user=<?= htmlspecialchars($row['id_acc']) ?>" method="POST">
                         <td><?= $i ?></td>
-                        <td><?= htmlspecialchars($row['username']) ?></td>
-                        <td><?= htmlspecialchars($row['phone']) ?></td>
+                        <td><?= htmlspecialchars($row['tentaikhoan']) ?></td>
+                        <td><?= htmlspecialchars($row['sodienthoai']) ?></td>
                         <td><?= htmlspecialchars($row['email']) ?></td>
-                        <td class="text-center"><?php echo htmlspecialchars($row['admin']) == 1 ? 'Admin' : 'User' ?></td>
-                        <td class="text-center">
-                            <?php if ($row['admin'] == 0) : ?>
-                                <button class="login-btn" name="grant" type="submit">Cấp Quyền</button>
-                            <?php elseif ($row['admin'] == 1) : ?>
-                                <button class="login-btn" name="revoke" type="submit">Xóa Quyền</button>
-                            <?php endif
-                            ?>
+         
+                        <td><?= htmlspecialchars($row['diachi']) ?></td>
+                            
                         </td>
-                    </form>
+                  
                 </tr>
             <?php
             endwhile;

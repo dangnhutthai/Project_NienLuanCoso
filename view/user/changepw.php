@@ -1,7 +1,7 @@
 <?php
 
 $id_acc = $_SESSION['iduser'];
-$sql_selectacc = "SELECT * FROM accounts WHERE id_acc = ?";
+$sql_selectacc = "SELECT * FROM tbl_user WHERE id_user = ?";
 $stmt = $pdo->prepare($sql_selectacc);
 $stmt->execute([
     $id_acc

@@ -1,5 +1,5 @@
 <?php
-include_once '../view/partials/heading.php';
+include_once '../view/user/partials/heading.php';
 
 $sql_select = "SELECT * FROM tbl_sanpham";
 $stmt = $pdo->prepare($sql_select);
@@ -31,7 +31,7 @@ if ($number_page == '' || $number_page == 1) {
     $begin = ($number_page * 8) - 8;
 }
 
-$sql_select = "SELECT * FROM tbl_sanpham LIMIT $begin,8";
+$sql_select = "SELECT * FROM tbl_sanpham ORDER BY id_sanpham DESC LIMIT $begin,8";
 $stmt = $pdo->prepare($sql_select);
 $stmt->execute();
 ?>
@@ -52,10 +52,22 @@ $stmt->execute();
                                 <p class="card-text text-danger text-decoration-line-through"><?= htmlspecialchars(number_format($row['gia'], 0, ',', '.') . 'VND') ?></p>
                                 <p class="card-text"><?= htmlspecialchars(number_format($row['gia_sale'], 0, ',', '.') . 'VND')  ?></p>
                                 <form action="model/cart/handle.php?idproduct=<?= htmlspecialchars($row['id_sanpham']) ?>" method="POST" enctype="multipart/form-data">
-                                    <button type="submit" name="addcart" class="btn btn-primary">Thêm giỏ hàng</button>
+                                <?php 
+                                if (isset($_SESSION['dangnhap'])) :
+                                ?>
+                                <?php if (isset($_SESSION['dangnhap'])) :
+                                        if ($row['soluong'] == 0) :
+                                    ?>
+                                            <p class="btn btn-secondary p-2">Tạm thời hết hàng</p>
+                                        <?php else : ?>
+
+
+                                            <button type="submit" name="addcart" class="btn btn-primary">Thêm giỏ hàng</button>
+                                        <?php endif;
+                                    else : ?>
+                                        <a href="index.php?controller=login" type="submit" name="addcart" class="btn btn-primary">Thêm giỏ hàng</a>
+                                        <?php endif ?>
                                     <?php
-                                    
-                                    if (isset($_SESSION['iduser'])) :
                                         if (substr_count($row_select_acc['pro_fav'], $row['masanpham']) == 0) :
                                     ?>
                                             <button type="submit" name="favorite" class="login-btn"><i class="fa-solid fa-heart" style="color: #fff;"></i></button>
@@ -63,8 +75,9 @@ $stmt->execute();
                                         else :
                                             ?>
                                             <button type="submit" name="favorite" class="login-btn"><i class="fa-solid fa-heart" style="color: #f06666;"></i></button>
-                                    <?php endif;
-                                    endif; ?>
+                                    <?php endif; else :?>
+                                        <a class="btn btn-primary" href="index.php?controller=login">Thêm giỏ hàng</a>
+<?php endif ?>
                                 </form>
                             </div>
                         </div>

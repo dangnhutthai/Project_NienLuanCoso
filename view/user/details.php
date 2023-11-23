@@ -1,6 +1,6 @@
 <?php
 
-include_once '../view/partials/heading.php';
+include_once '../view/user/partials/heading.php';
 $id_sanpham = $_GET['idproduct'];
 $sql_select = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc
     AND id_sanpham = $id_sanpham";
@@ -69,12 +69,17 @@ if (isset($_SESSION['iduser'])) {
             
             </div>
             <form action="model/cart/handle.php?idproduct=<?= htmlspecialchars($row['id_sanpham']) ?>" method="POST" enctype="multipart/form-data">
-                <?php if (isset($_SESSION['dangnhap'])) : ?>
+                <?php if (isset($_SESSION['dangnhap'])) : 
+                    if ($row['soluong'] == 0) :
+                    ?>
+                    <button class="btn btn-secondary p-2">Tạm thời hết hàng</button>
+                    <?php else :?>
                     <button type="submit" name="addcart" class="btn-addcart mt-4 p-2">Thêm giỏ hàng</button>
                     <button type="submit" name="buynow" class="btn-buy mt-4 p-2">Mua ngay</button>
-                <?php else : ?>
+                    
+                <?php endif; else : ?>
                     <a class="btn login-btn mt-3" href="index.php?controller=login">Đăng nhập ngay để thêm giỏ hàng</a>
-                <?php endif ?>
+                <?php endif; ?>
             </form>
         </div>
     </div>
@@ -84,7 +89,7 @@ if (isset($_SESSION['iduser'])) {
             <h4 class="text-white">Mô tả</h4>
             
         </div>  
-        <p><?= htmlspecialchars($row['noidung']) ?> </p>
+        <p class="fs-5"><?= htmlspecialchars($row['noidung']) ?> </p>
 
         </div>
         <div class="col">

@@ -74,6 +74,7 @@ $(document).ready(function () {
         },
     });
 });
+
 $(document).ready(function () {
     $('#changepwForm').validate({
         rules: {
@@ -127,12 +128,13 @@ $(document).ready(function () {
         },
     });
 });
+
 $(document).ready(function () {
     $('#changeacc').validate({
         rules: {
             changeaddress: {
                 required: true,
-                minlength: 5
+                minlength: 15
             },
             changephone: {
                 required: true,
@@ -170,3 +172,49 @@ $(document).ready(function () {
         },
     });
 });
+
+
+
+var char = new Morris.Line({
+    element: 'chart',
+    xkey: 'date',
+    ykeys: ['order', 'sales', 'quantity'],
+    labels: ['Đơn hàng', 'Doanh thu', 'Số lượng bán']
+});
+
+
+$('.select-time').change(function () {
+    var time = $(this).val();
+    if (time == '7ngay') {
+        var text = '7 ngày qua';
+    } else if (time == '30ngay') {
+        var text = '30 ngày qua';
+    } else if (time == '90ngay') {
+        var text = '90 ngày qua';
+    } else {
+        var text = '365 ngày qua';
+    }
+    $.ajax({
+        url: "../model/orders/statistic.php",
+        method: "POST",
+        dataType: "JSON",
+        data: {
+            time: time
+        },
+        success: function (data) {
+            char.setData(data);
+            ('#text-date').text(text);
+        }
+    });
+});
+
+$.ajax({
+    url: "../model/orders/statistic.php",
+    method: "POST",
+    dataType: "JSON",
+    success: function (data) {
+        char.setData(data);
+        $('#text-date').text(text);
+    }
+});
+

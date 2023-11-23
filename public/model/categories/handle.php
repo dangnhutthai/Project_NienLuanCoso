@@ -4,18 +4,18 @@ require '../../../bootstrap.php';
 
 
 if (isset($_POST['addcategory'])) {
-    $tendanhmuc = htmlspecialchars($_POST['tendanhmuc']);
+    $tendanhmuc = htmlspecialchars($_POST['category']);
     $sql_addcate = "INSERT INTO tbl_danhmuc (tendanhmuc) VALUES ('$tendanhmuc')";
     $stmt = $pdo->prepare($sql_addcate);
     $stmt->execute();
-    header('Location: ../../admin/admin.php?controller=category&action=index');
+    header('Location: ../../admin.php?controller=category&action=index');
 
 } elseif (isset($_POST['deletecategory'])) {
     $idcate = htmlspecialchars($_GET['idcategory']);
     $sql_deletecate = "DELETE FROM tbl_danhmuc WHERE id_danhmuc= '$idcate'";
     $stmt = $pdo->prepare($sql_deletecate);
     $stmt->execute();
-    header('Location: ../../admin/admin.php?controller=category&action=index');
+    header('Location: ../../admin.php?controller=category&action=index');
 } elseif (isset($_POST['updatecategory'])) {
     $idcate = htmlspecialchars($_GET['idcategory']);
     $tendanhmuc = htmlspecialchars($_POST['tendanhmuc']);
@@ -26,7 +26,7 @@ if (isset($_POST['addcategory'])) {
         $idcate
     ]);
     echo "<script>alert('Cập nhật tên loại thành công')</script>";
-    echo "<script>window.open('../../admin/admin.php?controller=category&action=index', '_self')</script>";
+    echo "<script>window.open('../../admin.php?controller=category&action=index', '_self')</script>";
 }
 
 

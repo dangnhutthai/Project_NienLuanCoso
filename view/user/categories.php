@@ -1,5 +1,5 @@
 <?php
-include_once '../view/partials/heading.php';
+include_once '../view/user/partials/heading.php';
 
 $iddanhmuc = $_GET['iddanhmuc'];
 $sql_select_brand = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
@@ -25,9 +25,9 @@ foreach ($row_cate as $row_cate) :
 ?>
     <div class="container-fluid">
         <div class="row justify-content-center">
-        <div class="d-inline-flex p-2 justify-content-center">
-            <h2 class="title rounded-pill py-2 px-4 my-2 text-white ">Danh mục: <?= htmlspecialchars($row_cate['tendanhmuc'])?></h2>
-        </div>
+            <div class="d-inline-flex p-2 justify-content-center">
+                <h2 class="title rounded-pill py-2 px-4 my-2 text-white ">Danh mục: <?= htmlspecialchars($row_cate['tendanhmuc']) ?></h2>
+            </div>
             <div class="col-11">
             <?php endforeach ?>
             <div class="row justify-content-center border">
@@ -40,8 +40,20 @@ foreach ($row_cate as $row_cate) :
                                 <p class="card-text" style="height: 150px !important;"><?= htmlspecialchars($row['tomtat']) ?></p>
                                 <p class="card-text text-danger text-decoration-line-through"><?= htmlspecialchars(number_format($row['gia'], 0, ',', '.') . 'VND') ?></p>
                                 <p class="card-text"><?= htmlspecialchars(number_format($row['gia_sale'], 0, ',', '.') . 'VND')  ?></p>
+
                                 <form action="model/cart/handle.php?idproduct=<?= htmlspecialchars($row['id_sanpham']) ?>" method="POST" enctype="multipart/form-data">
-                                    <button type="submit" name="addcart" class="btn btn-primary">Thêm giỏ hàng</button>
+                                <?php if (isset($_SESSION['dangnhap'])) :
+                                    if ($row['soluong'] == 0) :
+                                ?>
+                                        <p class="btn btn-secondary p-2">Tạm thời hết hàng</p>
+                                    <?php else : ?>
+
+
+                                            <button type="submit" name="addcart" class="btn btn-primary">Thêm giỏ hàng</button>
+                                        <?php endif;
+                                else : ?>
+                                        <a href="index.php?controller=login" type="submit" name="addcart" class="btn btn-primary">Thêm giỏ hàng</a>
+                                    <?php endif ?>
                                     <?php
 
                                     if (isset($_SESSION['iduser'])) :
@@ -54,12 +66,12 @@ foreach ($row_cate as $row_cate) :
                                             <button type="submit" name="favorite" class="login-btn"><i class="fa-solid fa-heart" style="color: #f06666;"></i></button>
                                     <?php endif;
                                     endif; ?>
-                                </form>
+                                        </form>
                             </div>
                         </div>
+                    </div>
+                <?php endwhile ?>
             </div>
-        <?php endwhile ?>
             </div>
         </div>
-    </div>
     </div>

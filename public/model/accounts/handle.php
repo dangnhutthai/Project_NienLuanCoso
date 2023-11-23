@@ -59,18 +59,18 @@ if (isset($_POST['signup'])) {
         print_r($sql_loginadmin);
         $_SESSION['dangnhap'] = $username;
     echo '<script>alert("Đăng nhập thành công!")</script>';
-    echo '<script>window.open("../../admin/admin.php?controller=account&action=index", "_SELF")</script>';
+    echo '<script>window.open("../../admin.php?controller=product&action=index", "_SELF")</script>';
     }
     echo '<script>alert("Đăng nhập thất bại! Tài khoản hoặc mật khẩu không chính xác")</script>';
     echo '<script>window.open("../../index.php?controller=login", "_SELF")</script>';
 } elseif (isset($_GET['logout'])) {
     unset($_SESSION['dangnhap']);
     unset($_SESSION['iduser']);
+    unset($_SESSION['cart']);
     header('Location: ../../index.php');
 } elseif (isset($_POST['changepw'])) {
     $oldpw = md5($_POST['oldpassword']);
     $newpw = md5($_POST['password']);
-    $cfnewpw = md5($_POST['confirm_password']);
     $iduser = $_SESSION['iduser'];
     $sql_user = "SELECT * FROM tbl_user WHERE id_user = ?";
     $stmt_user = $pdo->prepare($sql_user);
@@ -78,14 +78,29 @@ if (isset($_POST['signup'])) {
         $iduser
     ]);
     $row_user = $stmt_user->fetch();
-    if ($oldpw == $row_user['password']) {
-        $sql_changepw = "UPDATE tbl_user SET password = ?, confirm_password = ? WHERE id_acc = ?";
+    if ($oldpw == $row_user['matkhau']) {
+        $sql_changepw = "UPDATE tbl_user SET matkhau = ? WHERE id_user = ?";
         $stmt_change = $pdo->prepare($sql_changepw);
-        $stmt_change->execute([$newpw, $cfnewpw, $iduser]);
+        $stmt_change->execute([$newpw, $iduser]);
         echo '<script>alert("Đổi mật khẩu thành công!")</script>';
         echo '<script>window.open("../../index.php?controller=account", "_SELF")</script>';
     } else {
         echo '<script>alert("Đổi mật khẩu không thành công!")</script>';
         echo '<script>window.open("../../index.php?controller=changepw", "_SELF")</script>';
     }
+} elseif (isset($_POST['updateacc'])) {
+    $id_user = $_GET['iduser'];
+    $hovaten = $_POST['changeusername'];
+    $sodienthoai = $_POST['changephone'];
+    $diachi = $_POST['changeaddress'];
+    $sql_updateacc = "UPDATE tbl_user SET hovaten = ?, sodienthoai = ?, diachi = ? WHERE id_user = ?";
+    $stmt_updateacc = $pdo->prepare($sql_updateacc);
+    $stmt_updateacc->execute([
+        $hovaten,
+        $sodienthoai,
+        $diachi,
+        $id_user
+    ]);
+    echo '<script>alert("Cập nhật thông tin thành công!")</script>';
+    echo '<script>window.open("../../index.php?controller=confirmorder","_self")</script>';
 }
