@@ -10,7 +10,7 @@ $stmt->execute();
         <div class="col-11">
             <h1 class="text-center mt-2">Order</h1>
             <a href="admin.php?controller=statistic&action=index" class="btn btn-primary my-3">
-                <i class="fa fa-plus"></i> Xem thống kê
+            <i class="fa-solid fa-eye" style="color: #ffffff;"></i> Xem thống kê
             </a>
             <table id="results" class="table table-striped table-bordered table-info text-center my-3">
                 <thead>

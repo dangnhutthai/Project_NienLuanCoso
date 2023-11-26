@@ -49,7 +49,7 @@ $stmt->execute();
                         <td scope="col">Loại</td>
                         <td><select class="form-select w-25" aria-label="Default select example" name="idcategory">
                                 <?php while ($row = $stmt->fetch()) : ?>
-                                    <option value="<?= htmlspecialchars($row['id_danhmuc']) ?>"><?= htmlspecialchars($row['tendanhmuc']) ?></option>
+                                    <option value="<?= $row['id_danhmuc'] ?>"><?= $row['tendanhmuc'] ?></option>
                                 <?php endwhile ?>
                             </select></td>
                     </tr>

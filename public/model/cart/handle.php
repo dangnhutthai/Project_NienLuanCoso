@@ -5,7 +5,7 @@ require_once('../../../bootstrap.php');
 if (isset($_POST['addcart'])) {
     // session_destroy();
     $id_sanpham = htmlspecialchars($_GET['idproduct']);
-    $sql_addcart = "SELECT * FROM tbl_sanpham WHERE id_sanpham  =$id_sanpham LIMIT 1";
+    $sql_addcart = "SELECT * FROM tbl_sanpham WHERE id_sanpham  = $id_sanpham LIMIT 1";
     $stmt = $pdo->prepare($sql_addcart);
     $stmt->execute();
 
@@ -127,4 +127,19 @@ if (isset($_POST['addcart'])) {
         echo '<script>alert("Đã xóa ' . $row_pro['tensanpham'] . ' khỏi yêu thích!")</script>';
         echo '<script>window.open("/","_self")</script>';
     }
+} elseif (isset($_POST['buynow'])) {
+    $id_sanpham = htmlspecialchars($_GET['idproduct']);
+    $sql_addcart = "SELECT * FROM tbl_sanpham WHERE id_sanpham  = $id_sanpham LIMIT 1";
+    $stmt = $pdo->prepare($sql_addcart);
+    $stmt->execute();
+
+    if ($row = $stmt->fetch()) {
+        $new_product[] = array(
+            'id_sanpham' => $id_sanpham, 'tensanpham' => $row['tensanpham'], 'soluong' => 1, 'masanpham' => $row['masanpham'], 'gia' => $row['gia'],
+            'gia_sale' => $row['gia_sale'], 'tomtat' => $row['tomtat'], 'noidung' => $row['noidung'], 'hinhanh' => $row['hinhanh'], 'id_danhmuc' => $row['id_danhmuc']
+        );
+    }
+    $_SESSION['cart'] = $new_product;
+    echo '<script>window.open("../../index.php?controller=confirmorder","_self")</script>';
+
 }

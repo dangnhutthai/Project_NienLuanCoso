@@ -31,6 +31,12 @@ if ($main == '' || $main == 'product' && $action == 'index') {
     include_once '../view/admin/search.php';
 } elseif ( $main == 'statistic' && $action == 'index') {
     include_once '../view/admin/statistic.php';
+} elseif ( $main == 'tank' && $action == 'index') {
+    include_once '../view/admin/tank.php';
+} elseif ( $main == 'tank' && $action == 'update') {
+    include_once '../view/admin/updatetank.php';
+} elseif ( $main == 'tank' && $action == 'add') {
+    include_once '../view/admin/addtank.php';
 }
 
 ?>

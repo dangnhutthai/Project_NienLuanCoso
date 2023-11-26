@@ -24,7 +24,7 @@ $pdf->Write(10,'Đơn hàng của bạn gồm có:');
 	$pdf->Cell($width_cell[2],10,'Tên sản phẩm',1,0,'C',true);
 	$pdf->Cell($width_cell[3],10,'Số lượng',1,0,'C',true); 
 	$pdf->Cell($width_cell[4],10,'Giá',1,0,'C',true);
-	$pdf->Cell($width_cell[5],10,'Tổng tiền',1,1,'C',true); 
+	$pdf->Cell($width_cell[5],10,'Thành tiền',1,1,'C',true); 
 	$pdf->SetFillColor(235,236,236); 
 	$fill=false;
 	$i = 0;

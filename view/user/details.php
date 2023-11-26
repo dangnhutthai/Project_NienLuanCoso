@@ -89,7 +89,7 @@ if (isset($_SESSION['iduser'])) {
             <h4 class="text-white">Mô tả</h4>
             
         </div>  
-        <p class="fs-5"><?= htmlspecialchars($row['noidung']) ?> </p>
+        <p class="fs-5"><?= $row['noidung']?> </p>
 
         </div>
         <div class="col">

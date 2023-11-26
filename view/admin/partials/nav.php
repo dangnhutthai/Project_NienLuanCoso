@@ -8,23 +8,26 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
                     <li class="nav-item border border-white rounded shadow">
                         <a class="nav-link <?php if($_GET['controller'] == 'product') : echo 'text-warning'; else : echo 'text-white'; endif ?> fw-bold px-4" aria-current="page" href="admin.php?controller=product">Product</a>
                     </li>
-                    <li class="nav-item border border-white rounded mx-3 px-4 shadow">
+                    <li class="nav-item border border-white rounded mx-2 px-4 shadow">
                         <a class="nav-link <?php if($_GET['controller'] == 'category') : echo 'text-warning'; else : echo 'text-white'; endif ?> fw-bold" href="admin.php?controller=category&action=index" tabindex="-1" aria-disabled="true">Category</a>
+                    </li>
+                    <li class="nav-item border border-white rounded px-4 shadow me-2">
+                        <a class="nav-link <?php if($_GET['controller'] == 'tank') : echo 'text-warning'; else : echo 'text-white'; endif ?> fw-bold" href="admin.php?controller=tank&action=index">Tank</a>
                     </li>
                     <li class="nav-item border border-white rounded px-4 shadow">
                         <a class="nav-link <?php if($_GET['controller'] == 'order') : echo 'text-warning'; else : echo 'text-white'; endif ?> fw-bold" href="admin.php?controller=order&action=index">Order</a>
                     </li>
-                    <li class="nav-item border border-white rounded px-4 shadow ms-3">
+                    <li class="nav-item border border-white rounded px-4 shadow ms-2">
                         <a class="nav-link <?php if($_GET['controller'] == 'account') : echo 'text-warning'; else : echo 'text-white'; endif ?> fw-bold" href="admin.php?controller=account&action=index">Account</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <form class="d-flex ms-4 ps-4" action="admin.php?controller=search&action=index" method="POST">
-                        <input name="hotkey" class="form-control me-2" type="search" placeholder="Bạn muốn tìm loại cá nào?" aria-label="Search" style="width: 500px;">
+                        <input name="hotkey" class="form-control me-2" type="search" placeholder="Bạn muốn tìm loại cá nào?" aria-label="Search" style="width: 400px;">
                         <button name="search" class="btn btn-outline-light rounded-pill" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #e0dcdc;"></i></button>
                     </form>
                 </ul>

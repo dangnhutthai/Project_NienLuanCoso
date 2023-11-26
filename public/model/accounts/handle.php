@@ -40,7 +40,6 @@ if (isset($_POST['signup'])) {
 } elseif (isset($_POST['login'])) {
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars(md5($_POST['password']));
-
     $sql_loginuser = "SELECT * FROM tbl_user WHERE tentaikhoan= '$username' AND matkhau= '$password' LIMIT 1";
     $stmt_loginuser = $pdo->prepare($sql_loginuser);
     $stmt_loginuser->execute();
@@ -52,11 +51,9 @@ if (isset($_POST['signup'])) {
     if ($row['tentaikhoan'] == $username && $row['matkhau'] == $password) {
         $_SESSION['iduser'] = $row['id_user'];
         $_SESSION['dangnhap'] = $username;
-        print_r($sql_loginuser);
         echo '<script>alert("Đăng nhập thành công!")</script>';
         echo '<script>window.open("../../index.php?controller=home", "_SELF")</script>';
     } elseif ($row_admin['username'] == $username && $row_admin['password'] == $password) {
-        print_r($sql_loginadmin);
         $_SESSION['dangnhap'] = $username;
     echo '<script>alert("Đăng nhập thành công!")</script>';
     echo '<script>window.open("../../admin.php?controller=product&action=index", "_SELF")</script>';

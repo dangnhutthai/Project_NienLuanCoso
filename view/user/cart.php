@@ -80,7 +80,7 @@ require_once("../bootstrap.php");
             <td colspan="8" class="text-center p-4"><p>
                 <h3>Giỏ hàng của bạn đang trống :((</h3>
             </p>
-            <a href="index.php?controller=home" class="text-decoration-none">Nhấn vào để những sản phẩm mới nhất nhé!!</a>
+            <a href="index.php?controller=home" class="text-decoration-none">Nhấn vào để xem những sản phẩm mới nhất nhé!!</a>
         </td>
         <?php endif ?>
         </tbody>

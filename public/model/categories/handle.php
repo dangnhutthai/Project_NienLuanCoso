@@ -4,21 +4,28 @@ require '../../../bootstrap.php';
 
 
 if (isset($_POST['addcategory'])) {
-    $tendanhmuc = htmlspecialchars($_POST['category']);
-    $sql_addcate = "INSERT INTO tbl_danhmuc (tendanhmuc) VALUES ('$tendanhmuc')";
+    $tendanhmuc = $_POST['category'];
+    $sql_addcate = "INSERT INTO tbl_danhmuc (tendanhmuc) VALUES (?)";
     $stmt = $pdo->prepare($sql_addcate);
-    $stmt->execute();
-    header('Location: ../../admin.php?controller=category&action=index');
+    $stmt->execute([
+        $tendanhmuc
+    ]);
 
+    
+    echo "<script>alert('Thêm tên loại thành công')</script>";
+    header('Location: ../../admin.php?controller=category&action=index');
 } elseif (isset($_POST['deletecategory'])) {
-    $idcate = htmlspecialchars($_GET['idcategory']);
-    $sql_deletecate = "DELETE FROM tbl_danhmuc WHERE id_danhmuc= '$idcate'";
+    $idcate = $_GET['idcategory'];
+    $sql_deletecate = "DELETE FROM tbl_danhmuc WHERE id_danhmuc= ?";
     $stmt = $pdo->prepare($sql_deletecate);
-    $stmt->execute();
+    $stmt->execute([
+        $idcate
+    ]);
+    echo "<script>alert('Xóa tên loại thành công')</script>";
     header('Location: ../../admin.php?controller=category&action=index');
 } elseif (isset($_POST['updatecategory'])) {
-    $idcate = htmlspecialchars($_GET['idcategory']);
-    $tendanhmuc = htmlspecialchars($_POST['tendanhmuc']);
+    $idcate = $_GET['idcategory'];
+    $tendanhmuc = $_POST['tendanhmuc'];
     $sql_updatecate = "UPDATE tbl_danhmuc SET tendanhmuc = ? WHERE id_danhmuc= ?";
     $stmt = $pdo->prepare($sql_updatecate);
     $stmt->execute([

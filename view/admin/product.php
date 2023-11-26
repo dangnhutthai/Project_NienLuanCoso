@@ -39,13 +39,12 @@ $stmt->execute();
                             <td><?= htmlspecialchars($result['tomtat']) ?></td>
                             <td><?= htmlspecialchars($result['soluong']) ?></td>
                             <td><?= htmlspecialchars($result['tendanhmuc']) ?></td>
-
                             <td>
                                 
                                 <a href="admin.php?controller=product&action=update&idproduct=<?= htmlspecialchars($result['id_sanpham'])?>" class="btn btn-xs btn-warning text-white mb-1 ms-1">
                                     <i alt="Update" class="fa-solid fa-pen-nib" style="color: #ffffff;"></i></a> 
                                     <form action="/model/products/handle.php?idproduct=<?= htmlspecialchars($result['id_sanpham'])?>" method="POST">
-                                        <button class="btn btn-xs btn-danger ms-1" type="submit"  name="deleteproduct">
+                                        <button onclick="return confirm('Có chắc chắc xóa <?= $result['tensanpham'] ?>')" class="btn btn-xs btn-danger ms-1" type="submit"  name="deleteproduct">
                                             <i alt="Delete" class="fa fa-trash"></i></button> 
                                         </form>
                                         
