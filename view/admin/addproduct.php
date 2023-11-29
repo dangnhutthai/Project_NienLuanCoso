@@ -14,15 +14,15 @@ $stmt->execute();
                 <form action="../model/products/handle.php" method="POST" enctype="multipart/form-data">
                     <tr>
                         <td scope="col">Tên sản phẩm</td>
-                        <td><input class="w-100" type="text" name="name" ></td>
+                        <td><input class="w-100" type="text" name="name" required></td>
                     </tr>
                     <tr>
                         <td scope="col">Mã sản phẩm</td>
-                        <td><input type="text" name="code" ></td>
+                        <td><input type="text" name="code" required></td>
                     </tr>
                     <tr>
                         <td scope="col">Giá</td>
-                        <td><input type="text" name="price" ></td>
+                        <td><input type="text" name="price" required></td>
                     </tr>
                     <tr>
                         <td scope="col">Giá giảm</td>
@@ -30,19 +30,19 @@ $stmt->execute();
                     </tr>
                     <tr>
                         <td scope="col">Tóm tắt</td>
-                        <td><textarea class="w-100" name="description" id="" rows="5"></textarea></td>
+                        <td><textarea class="w-100" name="description" id="" rows="5" required></textarea></td>
                     </tr>
                     <tr>
                         <td scope="col">Nội dung</td>
-                        <td><textarea class="w-100" name="content" id="" rows="7"></textarea></td>
+                        <td><textarea class="w-100" name="content" id="" rows="7" required></textarea></td>
                     </tr>
                     <tr>
                         <td scope="col">Số lượng</td>
-                        <td><input type="text" name="amount" ></td>
+                        <td><input type="text" name="amount" required></td>
                     </tr>
                     <tr>
                         <td scope="col">Hình ảnh</td>
-                        <td><input class= "w-50" name="image" type="file"></td>
+                        <td><input class= "w-50" name="image" type="file" required></td>
                     </tr>
 
                     <tr>

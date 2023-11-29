@@ -3,22 +3,29 @@
 include_once '../view/user/partials/heading.php';
 $id_sanpham = $_GET['idproduct'];
 $sql_select = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc
-    AND id_sanpham = $id_sanpham";
+    AND id_sanpham = ?";
 $stmt = $pdo->prepare($sql_select);
-$stmt->execute();
+$stmt->execute([
+    $id_sanpham
+]);
 $row = $stmt->fetch();
-$id_danhmuc = $row['id_danhmuc'];
 
+$id_danhmuc = $row['id_danhmuc'];
 $sql_select_brandfav = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
-    AND tbl_danhmuc.id_danhmuc = '$id_danhmuc' AND tbl_sanpham.id_sanpham != '$id_sanpham'";
+    AND tbl_danhmuc.id_danhmuc = ? AND tbl_sanpham.id_sanpham != ? LIMIT 4";
 $stmt_brandfav = $pdo->prepare($sql_select_brandfav);
-$stmt_brandfav->execute();
+$stmt_brandfav->execute([
+    $id_danhmuc,
+    $id_sanpham
+]);
 
 if (isset($_SESSION['iduser'])) {
     $id_user = $_SESSION['iduser'];
-    $sql_select_acc = "SELECT * FROM tbl_user WHERE id_user = $id_user";
+    $sql_select_acc = "SELECT * FROM tbl_user WHERE id_user = ?";
     $stmt_select_acc = $pdo->prepare($sql_select_acc);
-    $stmt_select_acc->execute();
+    $stmt_select_acc->execute([
+        $id_user
+    ]);
     $row_select_acc = $stmt_select_acc->fetch();
 }
 ?>

@@ -19,7 +19,7 @@ foreach ($row as $row) :
                 <div class="row">
                     <div class="col-3">
                         <div class="m-2">
-                            <a class="btn btn-success w-100" href="">Tài khoản</a>
+                            <a class="btn btn-success w-100" href="index.php?controller=account">Tài khoản</a>
 
                         </div>
                         <div class="m-2">

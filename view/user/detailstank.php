@@ -7,7 +7,7 @@ $stmt = $pdo->prepare($sql_select);
 $stmt->execute();
 $row = $stmt->fetch();
 
-$sql_select_brandfav = "SELECT * FROM tbl_mauho WHERE id_mauho != $id_mauho";
+$sql_select_brandfav = "SELECT * FROM tbl_mauho WHERE id_mauho != $id_mauho LIMIT 4";
 $stmt_brandfav = $pdo->prepare($sql_select_brandfav);
 $stmt_brandfav->execute();
 

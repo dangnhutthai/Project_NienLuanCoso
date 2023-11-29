@@ -6,11 +6,11 @@
                 <form action="../model/categories/handle.php" method="POST">
                     <tr>
                         <td scope="col">Name category</td>
-                        <td><input class="w-100" type="text" name="category" placeholder="Name category"></td>
+                        <td><input class="w-100" type="text" name="category" placeholder="Name category" required></td>
                     </tr>
             </table>
             <div class="d-flex float-end">
-                <button type="submit" name="addcategory" class="btn btn-primary"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Add brand</button>
+                <button type="submit" name="addcategory" class="btn btn-primary"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Add category</button>
             </div>
         </form>
     </div>
