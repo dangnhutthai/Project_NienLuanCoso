@@ -10,9 +10,6 @@
             </select>
         </div>
     </div>
-
-
-
     <div id="chart" style="height: 250px;"></div>
 </div>
 <script src="js/script.js">

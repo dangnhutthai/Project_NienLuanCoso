@@ -5,9 +5,11 @@ require_once('../../../bootstrap.php');
 if (isset($_POST['addcart'])) {
     // session_destroy();
     $id_sanpham = htmlspecialchars($_GET['idproduct']);
-    $sql_addcart = "SELECT * FROM tbl_sanpham WHERE id_sanpham  = $id_sanpham LIMIT 1";
+    $sql_addcart = "SELECT * FROM tbl_sanpham WHERE id_sanpham  = ? LIMIT 1";
     $stmt = $pdo->prepare($sql_addcart);
-    $stmt->execute();
+    $stmt->execute([
+        $id_sanpham
+    ]);
 
     if ($row = $stmt->fetch()) {
         $new_product[] = array(
@@ -89,49 +91,58 @@ if (isset($_POST['addcart'])) {
 } elseif (isset($_POST['favorite'])) {
     $idproduct = $_GET['idproduct'];
     $iduser = $_SESSION['iduser'];
-    $sql_addfav = "SELECT * FROM tbl_user WHERE id_user = '$iduser' LIMIT 1";
+    $sql_addfav = "SELECT * FROM tbl_user WHERE id_user = ? LIMIT 1";
     $stmt_addfav = $pdo->prepare($sql_addfav);
-    $stmt_addfav->execute();
+    $stmt_addfav->execute([
+        $iduser
+    ]);
     $row_addfav = $stmt_addfav->fetch();
-    $sql_pro = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$idproduct' LIMIT 1";
+    $sql_pro = "SELECT * FROM tbl_sanpham WHERE id_sanpham = ? LIMIT 1";
     $stmt_pro = $pdo->prepare($sql_pro);
-    $stmt_pro->execute();
+    $stmt_pro->execute([
+        $idproduct
+    ]);
     $row_pro = $stmt_pro->fetch();
     $masanpham = $row_pro['masanpham'];
     if ($row_addfav['pro_fav'] == '') {
-        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = $iduser LIMIT 1";
+        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = ? LIMIT 1";
         $stmt_fav = $pdo->prepare($sql_fav);
         $stmt_fav->execute([
-            $masanpham
+            $masanpham,
+            $iduser
         ]);
         echo '<script>alert("Đã thêm ' . $row_pro['tensanpham'] . ' vào yêu thích!")</script>';
         echo '<script>window.open("/","_self")</script>';
     } elseif (substr_count($row_addfav['pro_fav'], $row_pro['masanpham']) == 0) {
         $str = $row_addfav['pro_fav'];
         $str_fav = $str . $row_pro['masanpham'];
-        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = $iduser LIMIT 1";
+        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = ? LIMIT 1";
         $stmt_fav = $pdo->prepare($sql_fav);
         $stmt_fav->execute([
-            $str_fav
+            $str_fav,
+            $iduser
         ]);
         echo '<script>alert("Đã thêm ' . $row_pro['tensanpham'] . ' vào yêu thích!")</script>';
         echo '<script>window.open("/","_self")</script>';
     } else {
         $str = $row_addfav['pro_fav'];
         $str_fav = str_replace($row_pro['masanpham'], '', $str);
-        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = $iduser LIMIT 1";
+        $sql_fav = "UPDATE tbl_user SET pro_fav = ? WHERE id_user = ? LIMIT 1";
         $stmt_fav = $pdo->prepare($sql_fav);
         $stmt_fav->execute([
-            $str_fav
+            $str_fav,
+            $iduser
         ]);
         echo '<script>alert("Đã xóa ' . $row_pro['tensanpham'] . ' khỏi yêu thích!")</script>';
         echo '<script>window.open("/","_self")</script>';
     }
 } elseif (isset($_POST['buynow'])) {
     $id_sanpham = htmlspecialchars($_GET['idproduct']);
-    $sql_addcart = "SELECT * FROM tbl_sanpham WHERE id_sanpham  = $id_sanpham LIMIT 1";
+    $sql_addcart = "SELECT * FROM tbl_sanpham WHERE id_sanpham  = ? LIMIT 1";
     $stmt = $pdo->prepare($sql_addcart);
-    $stmt->execute();
+    $stmt->execute([
+        $id_sanpham
+    ]);
 
     if ($row = $stmt->fetch()) {
         $new_product[] = array(
@@ -141,5 +152,4 @@ if (isset($_POST['addcart'])) {
     }
     $_SESSION['cart'] = $new_product;
     echo '<script>window.open("../../index.php?controller=confirmorder","_self")</script>';
-
 }

@@ -16,7 +16,7 @@ $total = 0;
                     <tr>
                         <th scope="col">Mã sản phẩm</th>
                         <th scope="col">Tên sản phẩm</th>
-                        <th scope="col">Size</th>
+                        <th scope="col">Loại</th>
                         <th scope="col">Số lượng mua</th>
                         <th scope="col">Giá tiền</th>
                         <th scope="col">Hình ảnh</th>

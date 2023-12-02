@@ -80,12 +80,16 @@ if (isset($_POST['pay'])) {
 } elseif (isset($_POST['checkorder'])) {
     $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
     $code_order = $_GET['idorder'];
-    $sql_update = "UPDATE tbl_cart SET cart_status = 1 WHERE code_cart =  $code_order";
+    $sql_update = "UPDATE tbl_cart SET cart_status = 1 WHERE code_cart =  ? ";
     $stmt_update = $pdo->prepare($sql_update);
-    $stmt_update->execute();
-    $sql_minius = "SELECT * FROM tbl_cart_details WHERE code_cart= $code_order";
+    $stmt_update->execute([
+        $code_order
+    ]);
+    $sql_minius = "SELECT * FROM tbl_cart_details WHERE code_cart= ? ";
     $stmt_minius = $pdo->prepare($sql_minius);
-    $stmt_minius->execute();
+    $stmt_minius->execute([
+        $code_order
+    ]);
     while ($row_minus = $stmt_minius->fetch()) {
         $code_pro = $row_minus['id_sanpham'];
         $sql_select = "SELECT * FROM tbl_sanpham WHERE id_sanpham = ?";
@@ -95,16 +99,19 @@ if (isset($_POST['pay'])) {
         ]);
         $row_select = $stmt_select->fetch();
         $remain = $row_select['soluong'] - $row_minus['soluongmua'];
-        $sql_up = "UPDATE tbl_sanpham SET soluong = $remain WHERE id_sanpham = ?";
+        $sql_up = "UPDATE tbl_sanpham SET soluong = ? WHERE id_sanpham = ?";
         $stmt_up = $pdo->prepare($sql_up);
         $stmt_up->execute([
+            $remain,
             $code_pro
         ]);
     }
     $sql_up_pro = "SELECT * FROM tbl_sanpham, tbl_cart_details WHERE tbl_sanpham.id_sanpham = tbl_cart_details.id_sanpham
-    AND tbl_cart_details.code_cart = $code_order";
+    AND tbl_cart_details.code_cart = ? ";
     $stmt_up_pro = $pdo->prepare($sql_up_pro);
-    $stmt_up_pro->execute();
+    $stmt_up_pro->execute([
+        $code_order
+    ]);
     $sql_sta = "SELECT * FROM tbl_thongke WHERE ngaydat = '$now'";
     $stmt_sta = $pdo->prepare($sql_sta);
     $stmt_sta->execute();
@@ -142,6 +149,5 @@ if (isset($_POST['pay'])) {
             $soluongban
         ]);
     }
-
     echo '<script>window.open("../../admin.php?controller=order&action=index","_self")</script>';
 }
