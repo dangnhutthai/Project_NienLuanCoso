@@ -59,11 +59,11 @@ foreach ($row_cate as $row_cate) :
                                     if (isset($_SESSION['iduser'])) :
                                         if (substr_count($row_select_acc['pro_fav'], $row['masanpham']) == 0) :
                                     ?>
-                                            <button type="submit" name="favorite" class="login-btn"><i class="fa-solid fa-heart" style="color: #fff;"></i></button>
+                                            <button type="submit" name="favorite" class="login-btn"><i class="fa-solid fa-heart" style="color: #fff;" data-bs-toggle="tooltip" data-bs-placement="top" title="Thêm sản phẩm yêu thích"></i></button>
                                         <?php
                                         else :
                                         ?>
-                                            <button type="submit" name="favorite" class="login-btn"><i class="fa-solid fa-heart" style="color: #f06666;"></i></button>
+                                            <button type="submit" name="favorite" class="login-btn"><i class="fa-solid fa-heart" style="color: #f06666;" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa sản phẩm yêu thích"></i></button>
                                     <?php endif;
                                     endif; ?>
                                         </form>
